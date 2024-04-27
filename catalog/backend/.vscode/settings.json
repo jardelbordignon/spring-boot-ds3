@@ -1,0 +1,15 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "rest-client.environmentVariables": {
+    "dev": {
+      "baseUrl": "http://localhost:8080"
+    },
+    "hml": {
+      "baseUrl": "https://your-hml-server.com"
+    },
+    "prd": {
+      "baseUrl": "https://your-server.com"
+    }
+  }
+}
