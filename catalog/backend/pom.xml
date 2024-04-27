@@ -18,6 +18,7 @@
 	</properties>
 	<dependencies>
 
+		<!-- actuator added by vscode spring boot plugin -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
