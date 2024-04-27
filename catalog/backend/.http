@@ -1,0 +1,5 @@
+
+# @name list_categories
+GET {{baseUrl}}/categories
+###
+
