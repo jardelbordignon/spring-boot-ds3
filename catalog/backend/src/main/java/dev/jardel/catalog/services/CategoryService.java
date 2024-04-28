@@ -1,5 +1,6 @@
 package dev.jardel.catalog.services;
 
+import dev.jardel.catalog.dto.CategoryDto;
 import dev.jardel.catalog.entities.Category;
 import dev.jardel.catalog.repositories.CategoryRepository;
 
@@ -16,7 +17,9 @@ public class CategoryService {
     private CategoryRepository repository;
 
     @Transactional(readOnly = true) // Read only transaction to avoid concurrency problems in the database access (only read operations)
-    public List<Category> findAll() {
-        return repository.findAll();
+    public List<CategoryDto> findAll() {
+        List<Category> categories = repository.findAll();
+        // List<CategoryDto> categoryDtos = categories.stream().map(cat -> new CategoryDto(cat)).toList();
+        return categories.stream().map(CategoryDto::new).toList();
     }
 }
