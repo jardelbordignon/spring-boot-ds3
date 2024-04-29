@@ -9,6 +9,7 @@ import dev.jardel.catalog.repositories.CategoryRepository;
 
 import java.util.List;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,5 +44,18 @@ public class CategoryService {
         category.setName(dto.getName());
         category = this.repository.save(category);
         return new CategoryDto(category);
+    }
+
+    @Transactional
+    public GetCategoryDto update(Long id, CategoryDto dto) {
+        try {
+            Category category = this.repository.getReferenceById(id);
+            category.setName(dto.getName());
+            category = this.repository.save(category);
+            dto = new CategoryDto(category);
+            return new GetCategoryDto(dto);
+        } catch (EntityNotFoundException e) {
+            throw new CategoryNotFoundException("Category not found with id: " + id);
+        }
     }
 }

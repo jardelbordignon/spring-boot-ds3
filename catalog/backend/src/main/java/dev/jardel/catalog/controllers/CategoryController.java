@@ -1,6 +1,5 @@
 package dev.jardel.catalog.controllers;
 
-import com.fasterxml.jackson.core.TreeNode;
 import dev.jardel.catalog.dto.category.CategoryDto;
 import dev.jardel.catalog.dto.category.GetCategoriesDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +34,11 @@ public class CategoryController {
     dto = service.create(dto);
     var uri = uriComponentsBuilder.path("/{id}").buildAndExpand(dto.getId()).toUri();
     return ResponseEntity.created(uri).build();
+  }
+
+  @PutMapping(path = "/{id}")
+  public ResponseEntity<GetCategoryDto> update(@PathVariable Long id, @RequestBody CategoryDto reqDto) {
+    GetCategoryDto dto = service.update(id, reqDto);
+    return ResponseEntity.ok().body(dto);
   }
 }
