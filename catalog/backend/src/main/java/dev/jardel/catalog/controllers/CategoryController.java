@@ -3,6 +3,7 @@ package dev.jardel.catalog.controllers;
 import dev.jardel.catalog.dto.category.CategoryDto;
 import dev.jardel.catalog.dto.category.GetCategoriesDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,17 @@ public class CategoryController {
   private CategoryService service;
 
   @GetMapping
+  public ResponseEntity<Page<CategoryDto>> findAll(
+          @RequestParam(value = "page", defaultValue = "0") Integer page,
+          @RequestParam(value = "perPage", defaultValue = "15") Integer perPage,
+          @RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
+          @RequestParam(value = "direction", defaultValue = "ASC") String direction
+  ) {
+    Page<CategoryDto> dto = service.findAllPaged(page, perPage, orderBy, direction);
+    return ResponseEntity.ok().body(dto);
+  }
+
+  @GetMapping(path = "/all")
   public ResponseEntity<GetCategoriesDto> findAll() {
     GetCategoriesDto dto = service.findAll();
     return ResponseEntity.ok().body(dto);

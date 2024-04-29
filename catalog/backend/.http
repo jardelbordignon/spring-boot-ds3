@@ -3,12 +3,30 @@ POST  {{baseUrl}}/categories
 Content-Type: application/json
 
 {
-  "email": "Music"
+  "name": "Music"
 }
 ###
 
+# @name update_category
+PUT  {{baseUrl}}/categories/1
+Content-Type: application/json
+
+{
+  "name": "Register updated"
+}
+###
+
+# @name delete_category
+DELETE {{baseUrl}}/categories/1
+###
+
+
 # @name get_categories
-GET {{baseUrl}}/categories
+GET {{baseUrl}}/categories/all
+###
+
+# @name get_categories_paged
+GET {{baseUrl}}/categories?page=0&perPage=2&orderBy=name&direction=ASC
 ###
 
 # @name get_category
