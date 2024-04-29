@@ -1,5 +1,6 @@
 package dev.jardel.catalog.services;
 
+import dev.jardel.catalog.config.DatabaseException;
 import dev.jardel.catalog.domain.category.exceptions.CategoryNotFoundException;
 import dev.jardel.catalog.dto.category.CategoryDto;
 import dev.jardel.catalog.dto.category.GetCategoriesDto;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,6 +58,17 @@ public class CategoryService {
             return new GetCategoryDto(dto);
         } catch (EntityNotFoundException e) {
             throw new CategoryNotFoundException("Category not found with id: " + id);
+        }
+    }
+
+    public void delete(Long id) {
+        try {
+            if (!repository.existsById(id)) {
+                throw new CategoryNotFoundException("Category not found with id: " + id);
+            }
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Category with id: " + id + " cannot be deleted because it is in use by other entities.\n" + e.getMessage());
         }
     }
 }
