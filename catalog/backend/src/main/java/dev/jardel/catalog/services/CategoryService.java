@@ -1,13 +1,13 @@
 package dev.jardel.catalog.services;
 
-import dev.jardel.catalog.dto.CategoryDto;
-import dev.jardel.catalog.dto.GetCategoriesDto;
-import dev.jardel.catalog.dto.GetCategoryDto;
-import dev.jardel.catalog.entities.Category;
+import dev.jardel.catalog.domain.category.exceptions.CategoryNotFoundException;
+import dev.jardel.catalog.dto.category.CategoryDto;
+import dev.jardel.catalog.dto.category.GetCategoriesDto;
+import dev.jardel.catalog.dto.category.GetCategoryDto;
+import dev.jardel.catalog.domain.category.Category;
 import dev.jardel.catalog.repositories.CategoryRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,12 +29,11 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public GetCategoryDto findById(Long id) {
-        Optional<Category> categoryObj = repository.findById(id);
-        if (categoryObj.isEmpty()) {
-            throw new IllegalArgumentException("Category not found with id: " + id);
-        }
+        Category category = this.repository
+                .findById(id)
+                .orElseThrow(() -> new CategoryNotFoundException("Category not found with id: " + id));
 
-        CategoryDto categoryDto = new CategoryDto(categoryObj.get());
+        CategoryDto categoryDto = new CategoryDto(category);
         return new GetCategoryDto(categoryDto);
     }
 }
