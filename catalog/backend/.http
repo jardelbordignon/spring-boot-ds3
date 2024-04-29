@@ -1,3 +1,11 @@
+# @name create_category
+POST  {{baseUrl}}/categories
+Content-Type: application/json
+
+{
+  "email": "Music"
+}
+###
 
 # @name get_categories
 GET {{baseUrl}}/categories
