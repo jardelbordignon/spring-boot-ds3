@@ -1,6 +1,6 @@
-package dev.jardel.catalog.dto;
+package dev.jardel.catalog.dto.category;
 
-import dev.jardel.catalog.entities.Category;
+import dev.jardel.catalog.domain.category.Category;
 
 public class CategoryDto {
     private Long id;

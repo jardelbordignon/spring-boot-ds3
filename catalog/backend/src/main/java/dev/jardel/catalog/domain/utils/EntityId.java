@@ -1,4 +1,4 @@
-package dev.jardel.catalog.entities.utils;
+package dev.jardel.catalog.domain.utils;
 
 import java.io.Serial;
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package dev.jardel.catalog.dto;
+package dev.jardel.catalog.dto.category;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,6 +1,6 @@
-package dev.jardel.catalog.entities;
+package dev.jardel.catalog.domain.category;
 
-import dev.jardel.catalog.entities.utils.EntityId;
+import dev.jardel.catalog.domain.utils.EntityId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
