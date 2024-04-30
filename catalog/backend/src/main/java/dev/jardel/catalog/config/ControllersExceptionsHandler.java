@@ -1,6 +1,7 @@
 package dev.jardel.catalog.config;
 
 import dev.jardel.catalog.domain.category.exceptions.CategoryNotFoundException;
+import dev.jardel.catalog.domain.product.exceptions.ProductNotFoundException;
 import dev.jardel.catalog.dto.common.ErrorResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,6 +22,10 @@ public class ControllersExceptionsHandler {
         return notFoundResponse(e, req);
     }
 
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ErrorResponseDto> handleProductNotFound(ProductNotFoundException e, HttpServletRequest req) {
+        return notFoundResponse(e, req);
+    }
 
     // exception response builders
 
