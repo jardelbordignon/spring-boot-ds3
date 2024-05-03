@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,17 +29,13 @@ public class CategoryService {
     @Transactional(readOnly = true) // Read only transaction to avoid concurrency problems in the database access (only read operations)
     public GetCategoriesDto findAll() {
         List<Category> categories = repository.findAll();
-        // List<CategoryDto> categoryDtos = categories.stream().map(cat -> new CategoryDto(cat)).toList();
         List<CategoryDto> categoryDtos = categories.stream().map(CategoryDto::new).toList();
         return new GetCategoriesDto(categoryDtos);
     }
 
     @Transactional(readOnly = true) // Read only transaction to avoid concurrency problems in the database access (only read operations)
-    public Page<CategoryDto> findAllPaged(Integer page, Integer perPage, String orderBy, String direction) {
-        PageRequest pageRequest = PageRequest.of(page, perPage, Direction.valueOf(direction), orderBy);
-
-        //List<Category> categories = repository.findAll();
-        Page<Category> categories = repository.findAll(pageRequest);
+    public Page<CategoryDto> findAllPaged(Pageable pageable) {
+        Page<Category> categories = repository.findAll(pageable);
         return categories.map(CategoryDto::new);
     }
 

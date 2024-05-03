@@ -4,6 +4,7 @@ import dev.jardel.catalog.dto.category.CategoryDto;
 import dev.jardel.catalog.dto.category.GetCategoriesDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,13 +20,8 @@ public class CategoryController {
   private CategoryService service;
 
   @GetMapping
-  public ResponseEntity<Page<CategoryDto>> findAll(
-          @RequestParam(value = "page", defaultValue = "0") Integer page,
-          @RequestParam(value = "perPage", defaultValue = "15") Integer perPage,
-          @RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
-          @RequestParam(value = "direction", defaultValue = "ASC") String direction
-  ) {
-    Page<CategoryDto> dto = service.findAllPaged(page, perPage, orderBy, direction);
+  public ResponseEntity<Page<CategoryDto>> findAll(Pageable pageable) {
+    Page<CategoryDto> dto = service.findAllPaged(pageable);
     return ResponseEntity.ok().body(dto);
   }
 

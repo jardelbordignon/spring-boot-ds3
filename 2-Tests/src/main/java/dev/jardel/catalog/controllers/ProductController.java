@@ -5,6 +5,7 @@ import dev.jardel.catalog.dto.product.GetProductDto;
 import dev.jardel.catalog.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,13 +18,8 @@ public class ProductController {
   private ProductService service;
 
   @GetMapping
-  public ResponseEntity<Page<ProductDto>> findAll(
-          @RequestParam(value = "page", defaultValue = "0") Integer page,
-          @RequestParam(value = "perPage", defaultValue = "15") Integer perPage,
-          @RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
-          @RequestParam(value = "direction", defaultValue = "ASC") String direction
-  ) {
-    Page<ProductDto> dto = service.findAllPaged(page, perPage, orderBy, direction);
+  public ResponseEntity<Page<ProductDto>> findAll(Pageable pageable) { // params: page, size and sort
+    Page<ProductDto> dto = service.findAllPaged(pageable);
     return ResponseEntity.ok().body(dto);
   }
 
