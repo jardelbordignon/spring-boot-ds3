@@ -62,14 +62,14 @@ public class ProductService {
     }
 
     public void delete(Long id) {
-        try {
+    //    try {
             if (!productRepository.existsById(id)) {
                 throw new ProductNotFoundException("Product not found with id: " + id);
             }
             productRepository.deleteById(id);
-        } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Product with id: " + id + " cannot be deleted because it is in use by other entities.\n" + e.getMessage());
-        }
+//        } catch (DataIntegrityViolationException e) {
+//            throw new DatabaseException("Product with id: " + id + " cannot be deleted because it is in use by other entities.\n" + e.getMessage());
+//        }
     }
 
     private Product handleCopyDtoToEntity(ProductDto dto, Product entity) {

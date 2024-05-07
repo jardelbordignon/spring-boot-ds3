@@ -34,4 +34,17 @@ public class Product extends EntityBase implements Serializable {
     // sobre o JoinColumn, o joinColumns vai referenciar a classe em si,
     // e o inverseJoinColumns vai referenciar o tipo da classe informada no Set.
     // nesse caso joinColumns -> Product e inverseJoinColumns -> Category
+
+    public Product(String name, String description, Double price, String imgUrl, Set<Category> categories) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
+        this.categories = categories;
+    }
+
+    public Product(Long id, String name, String description, Double price, String imgUrl, Set<Category> categories) {
+        this.setId(id);
+        new Product(name, description, price, imgUrl, categories);
+    }
 }
