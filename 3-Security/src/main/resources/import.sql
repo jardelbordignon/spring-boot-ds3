@@ -1,3 +1,13 @@
+INSERT INTO users (first_name, last_name, email, password) VALUES ('John', 'Doe', 'johndoe@email.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Jessie', 'Lane', 'jessielane@email.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+
+INSERT INTO roles (authority) VALUES ('OPERATOR');
+INSERT INTO roles (authority) VALUES ('ADMIN');
+
+INSERT INTO roles_users (role_id, user_id) VALUES (1, 1);
+INSERT INTO roles_users (role_id, user_id) VALUES (1, 2);
+INSERT INTO roles_users (role_id, user_id) VALUES (2, 2);
+
 INSERT INTO categories (name) VALUES ('Pizza'), ('Risoto'), ('Macarrão');
 
 INSERT INTO products (name, price, img_url, description) VALUES ('Pizza Bacon', 49.9, 'https://raw.githubusercontent.com/devsuperior/sds2/master/assets/pizza_bacon.jpg', 'Pizza de bacon com mussarela, orégano, molho especial e tempero da casa.');
