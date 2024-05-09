@@ -24,6 +24,8 @@ public class User extends EntityBase {
     private String email;
     private String password;
 
+    // No spring security, o usuário tem que ter pelo menos uma role, então sempre será necessário carregar as roles do usuário corrente
+    // FetchType.EAGER para que o Hibernate carregue as roles assim que o usuário for carregado
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "roles_users",
             joinColumns = @JoinColumn (name = "user_id"),
